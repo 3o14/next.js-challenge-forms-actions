@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .primary-btn {
+    @apply w-full bg-lime-500 text-white font-medium rounded-full text-center hover:bg-lime-400 transition-colors;
+  }
+}
