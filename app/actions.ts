@@ -27,6 +27,5 @@ export async function logIn(prevState: any, formData: FormData) {
 		return result.error.flatten();
 	} else {
 		console.log("Success");
-		return null;
 	}
 }
