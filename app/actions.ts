@@ -3,17 +3,22 @@
 import { z } from "zod";
 
 const formSchema = z.object({
-	email: z.string().email(),
-	username: z.string().min(2),
+	email: z
+		.string()
+		.email()
+		.refine((email) => email.endsWith("@zod.com"), {
+			message: "'@zod.com' 이메일만 허용됩니다.",
+		}),
+	username: z.string().min(5),
 	password: z
 		.string()
-		// 12345 일 경우에만 허용
-		.refine((password) => password === "12345", {
-			message: "잘못된 비밀번호입니다.",
+		.min(10)
+		.refine((password) => /[0-9]/.test(password), {
+			message: "비밀번호는 1개 이상의 숫자를 포함해야 합니다.",
 		}),
 });
 export async function logIn(prevState: any, formData: FormData) {
-  await new Promise((resolve) => setTimeout(resolve, 500));
+	await new Promise((resolve) => setTimeout(resolve, 500));
 
 	const data = {
 		email: formData.get("email"),
